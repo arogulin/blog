@@ -1,6 +1,12 @@
 {
     "require": {
-        "silex/silex": "1.0.*@dev"
+        "silex/silex": "1.0.*@dev",
+        "doctrine/dbal": "2.2.*",
+        "twig/twig": ">=1.8,<2.0-dev",
+        "symfony/twig-bridge": "~2.2",
+        "symfony/validator": "~2.2",
+        "symfony/form": "~2.2",
+        "symfony/security": "~2.2"
     },
     "autoload": {
         "psr-0": {
