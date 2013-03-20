@@ -1,0 +1,12 @@
+debug: false
+locale: en
+
+config:
+  database:
+    db.options:
+      driver:   pdo_mysql
+      host:     localhost
+      dbname:   database
+      user:     user
+      password: password
+      charset:  utf8
