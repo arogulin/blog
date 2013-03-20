@@ -1,4 +1,13 @@
 {
+    "name": "saitovod/blog",
+    "description": "Simple blog on Silex PHP micro-framework",
+    "minimum-stability": "stable",
+    "authors": [
+        {
+            "name": "Aleksey Rogulin",
+            "email": "aleksey.php@gmail.com"
+        }
+    ],
     "require": {
         "silex/silex": "1.0.*@dev",
         "doctrine/dbal": "2.2.*",
