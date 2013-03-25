@@ -1,0 +1,11 @@
+{% extends "index.twig" %}
+
+{% block content %}
+    {% for post in posts %}
+        <h1>{{ post.title }}</h1>
+        <div>{{ post.date | date("d.m.Y H:i") }}</div>
+        <div>
+            {{ post.content | raw | slice(0, 10) }}
+        </div>
+    {% endfor %}
+{% endblock %}

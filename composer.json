@@ -21,7 +21,8 @@
         "symfony/yaml": "~2.2",
         "symfony/browser-kit": "~2.2",
         "igorw/config-service-provider": "~1.1",
-        "phpunit/phpunit": "~3.7"
+        "phpunit/phpunit": "~3.7",
+        "phpunit/dbunit": ">=1.2"
     },
     "autoload": {
         "psr-0": {

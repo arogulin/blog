@@ -1,18 +1,13 @@
 <?php
 namespace Blog\Entity;
 
-use Silex\Application;
-use Symfony\Component\HttpFoundation\Request;
+class Post extends BaseEntity {
 
-class Post {
+    protected $id;
+    protected $title;
+    protected $slug;
+    protected $date;
+    protected $content;
+    protected $status;
 
-    public function __construct(Application $app) {
-        $this->app = $app;
-    }
-
-    public function findBySlug($slug) {
-        $query = "SELECT * FROM `posts` WHERE `status` = ? AND `slug` = ?";
-        $post = $this->app['db']->fetchAssoc($query, array('public', $slug));
-        return $post;
-    }
 }

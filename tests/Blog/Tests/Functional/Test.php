@@ -12,11 +12,11 @@ class Test extends WebTestCase {
 
         return $app;
     }
-    
+
     public function testMainPage() {
         $client = $this->createClient();
         $crawler = $client->request('GET', '/');
-        
+
         $this->assertTrue($client->getResponse()->isOk());
     }
 }

@@ -3,13 +3,13 @@ $blog = $app['controllers_factory'];
 
 // Главная страница
 $blog->get('/', 'Blog\Controller\IndexController::index')
-    ->value('pageNum', 1);
+    ->value('page', 1);
 
 // Навигация
-$blog->get('/page/{pageNum}', 'Blog\Controller\IndexController::index')
-    ->assert('pageNum', '\d+')
-    ->convert('pageNum', function ($pageNum) {
-        return intval($pageNum);
+$blog->get('/page/{page}', 'Blog\Controller\IndexController::index')
+    ->assert('page', '\d+')
+    ->convert('page', function ($page) {
+        return intval($page);
     });
 
 // Страница конкретного поста

@@ -4,7 +4,7 @@
 
 {% block content %}
     <h1>{{ post.title }}</h1>
-    <div>{{ post.date | date("Y.m.d H:i") }}</div>
+    <div>{{ post.date | date("d.m.Y H:i") }}</div>
     <div>
         {{ post.content | raw }}
     </div>

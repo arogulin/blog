@@ -3,10 +3,18 @@ namespace Blog\Controller;
 
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
+use Blog\Repository\PostsRepository;
 
 class IndexController {
 
     public function index(Request $request, Application $app) {
-        return 'Hello!';
+        $page = $request->get('page', 1);
+        $limit = $app['config']['pagination']['posts_main_page'];
+        $offset = ($page > 1) ? ($page - 1) * $limit : 0;
+
+        $postsRepo = new PostsRepository($app);
+        $posts = $postsRepo->getRecent($limit, $offset);
+
+        return $app['twig']->render('posts.twig', array('posts' => $posts));
     }
 }

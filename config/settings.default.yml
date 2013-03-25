@@ -10,3 +10,6 @@ config:
       user:     user
       password: password
       charset:  utf8
+      
+  pagination:
+    posts_main_page: 10
