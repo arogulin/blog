@@ -2,11 +2,12 @@
 namespace Blog\Tests\Unit\Lib;
 
 use Blog\Lib\Functions;
+use Silex\WebTestCase;
 
-class TestFunctions extends \PHPUnit_Framework_TestCase {
+class TestFunctions extends WebTestCase {
 
     public function createApplication() {
-        require __DIR__ . '/../../../../config/bootstrap.php';
+        require __DIR__ . '/../../../../../config/bootstrap.php';
         $app['debug'] = true;
         $app['exception_handler']->disable();
 
