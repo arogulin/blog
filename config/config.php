@@ -41,5 +41,6 @@ if ($app['debug']) {
 
 // Register Twig template engine
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
-    'twig.path' => ROOT_DIR . '/apps/Blog/Templates'
+    'twig.path' => ROOT_DIR . '/apps/Blog/Templates',
+    'twig.options' => array('cache' => ROOT_DIR.'/cache/twig'),
 ));
