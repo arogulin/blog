@@ -1,6 +1,8 @@
 <?php
 // Path to root dir of project
-define('ROOT_DIR', __DIR__ . '/..');
+if(!defined('ROOT_DIR')) {
+    define('ROOT_DIR', realpath(__DIR__ . '/..'));
+}
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
