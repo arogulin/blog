@@ -14,7 +14,7 @@ class IndexController {
 
         $postsRepo = new PostsRepository($app);
         $posts = $postsRepo->getRecent($limit, $offset);
-
+        
         return $app['twig']->render('posts.twig', array('posts' => $posts));
     }
 }

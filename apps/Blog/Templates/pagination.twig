@@ -1,0 +1,6 @@
+{% if posts.getFoundRows() > app.config.pagination.posts_main_page %}
+<div class="pagination">
+    {% set pages = posts.getFoundRows() / app.config.pagination.posts_main_page %}
+    {{ pages }}
+</div>
+{% endif %}
