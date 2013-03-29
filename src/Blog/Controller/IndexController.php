@@ -14,7 +14,12 @@ class IndexController {
 
         $postsRepo = new PostsRepository($app);
         $posts = $postsRepo->getRecent($limit, $offset);
-
+        
+        // If requested non existed page
+        if(count($posts) == 0 && $posts->getFoundRows()) {
+            return $app->abort(404);
+        }
+      
         $pagination = array();
         if ($posts->getFoundRows() > $limit) {
             $pagesQuantity = ceil($posts->getFoundRows() / $limit);

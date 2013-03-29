@@ -8,7 +8,6 @@ class TestMainPage extends WebTestCase {
     public function createApplication() {
         require ROOT_DIR . '/config/bootstrap.php';
         $app['debug'] = true;
-        $app['exception_handler']->disable();
 
         // TODO: init DB with some pages of posts, for pagination testing
 
@@ -40,7 +39,7 @@ class TestMainPage extends WebTestCase {
 
         // TODO: check that posts are not equal and count of posts is as expected
 
-        // TODO: check that non exists page show 404 error page
-
+        $crawler = $client->request('GET', '/page/20');
+        $this->assertTrue($client->getResponse()->isNotFound());
     }
 }
