@@ -1,6 +1,25 @@
-{% if posts.getFoundRows() > app.config.pagination.posts_main_page %}
-<div class="pagination">
-    {% set pages = posts.getFoundRows() / app.config.pagination.posts_main_page %}
-    {{ pages }}
-</div>
+{% if pagination.pages_quantity > 1 %}
+    <ul class="pagination">
+        {% if pagination.current_page > 1 %}
+            <li class="prev_page">
+                <a href="{{ url(pagination.route_name, {page: pagination.current_page - 1}) }}">Назад</a>
+            </li>
+        {% endif %}
+
+        {% for i in range(1, pagination.pages_quantity) %}
+            <li class="page">
+                {% if i == pagination.current_page %}
+                    <span class="current_page">{{ i }}</span>
+                {% else %}
+                    <a href="{{ url(pagination.route_name, {page: i}) }}">{{ i }}</a>
+                {% endif %}
+            </li>
+        {% endfor %}
+
+        {% if pagination.current_page < pagination.pages_quantity %}
+            <li class="next_page">
+                <a href="{{ url(pagination.route_name, {page: pagination.current_page + 1}) }}">Вперёд</a>
+            </li>
+        {% endif %}
+    </ul>
 {% endif %}

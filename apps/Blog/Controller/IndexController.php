@@ -14,7 +14,17 @@ class IndexController {
 
         $postsRepo = new PostsRepository($app);
         $posts = $postsRepo->getRecent($limit, $offset);
-        
-        return $app['twig']->render('posts.twig', array('posts' => $posts));
+
+        $pagination = array();
+        if ($posts->getFoundRows() > $limit) {
+            $pagesQuantity = ceil($posts->getFoundRows() / $limit);
+            $pagination = array(
+                'current_page'   => $page,
+                'pages_quantity' => $pagesQuantity,
+                'route_name'     => 'main_pagination',
+            );
+        }
+
+        return $app['twig']->render('posts.twig', array('posts' => $posts, 'pagination' => $pagination));
     }
 }

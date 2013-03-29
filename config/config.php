@@ -1,6 +1,6 @@
 <?php
 // Path to root dir of project
-if(!defined('ROOT_DIR')) {
+if (!defined('ROOT_DIR')) {
     define('ROOT_DIR', realpath(__DIR__ . '/..'));
 }
 
@@ -41,8 +41,11 @@ if ($app['debug']) {
     });
 }
 
+// Register UrlGenerator for url generation (f.e. in pagination)
+$app->register(new Silex\Provider\UrlGeneratorServiceProvider());
+
 // Register Twig template engine
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
-    'twig.path' => ROOT_DIR . '/apps/Blog/Templates',
-    'twig.options' => array('cache' => ROOT_DIR.'/cache/twig'),
+    'twig.path'    => ROOT_DIR . '/apps/Blog/Templates',
+    'twig.options' => array('cache' => ROOT_DIR . '/cache/twig'),
 ));
