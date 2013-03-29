@@ -6,6 +6,8 @@ if (!defined('ROOT_DIR')) {
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Translation\Loader\YamlFileLoader;
+
 
 // Import settings.yml to $app
 $app->register(new Igorw\Silex\ConfigServiceProvider(ROOT_DIR . "/config/settings.yml"));
@@ -46,6 +48,15 @@ $app->register(new Silex\Provider\UrlGeneratorServiceProvider());
 
 // Register Twig template engine
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
-    'twig.path'    => ROOT_DIR . '/apps/Blog/Templates',
+    'twig.path'    => ROOT_DIR . '/src/Blog/Templates',
     'twig.options' => array('cache' => ROOT_DIR . '/cache/twig'),
 ));
+
+// Register translation
+$app->register(new Silex\Provider\TranslationServiceProvider());
+$app['translator'] = $app->share($app->extend('translator', function ($translator, $app) {
+    $locale = $app['locale'];
+    $translator->addLoader('yaml', new YamlFileLoader());
+    $translator->addResource('yaml', ROOT_DIR . '/src/Blog/Locales/' . $locale . '.yml', $locale);
+    return $translator;
+}));

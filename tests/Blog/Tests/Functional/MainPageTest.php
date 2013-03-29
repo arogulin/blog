@@ -40,5 +40,7 @@ class TestMainPage extends WebTestCase {
 
         // TODO: check that posts are not equal and count of posts is as expected
 
+        // TODO: check that non exists page show 404 error page
+
     }
 }
