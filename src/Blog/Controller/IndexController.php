@@ -14,18 +14,19 @@ class IndexController {
 
         $postsRepo = new PostsRepository($app);
         $posts = $postsRepo->getRecent($limit, $offset);
-        
+
         // If requested non existed page
-        if(count($posts) == 0 && $posts->getFoundRows()) {
+        if (count($posts) == 0 && $posts->getFoundRows()) {
             return $app->abort(404);
         }
-      
+
         $pagination = array();
         if ($posts->getFoundRows() > $limit) {
             $pagesQuantity = ceil($posts->getFoundRows() / $limit);
             $pagination = array(
                 'current_page'   => $page,
                 'pages_quantity' => $pagesQuantity,
+                'near_pages'     => $app['config']['pagination']['near_pages'],
                 'route_name'     => 'main_pagination',
             );
         }

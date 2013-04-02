@@ -14,3 +14,4 @@ config:
       
   pagination:
     posts_main_page: 10
+    near_pages: 2
