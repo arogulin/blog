@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit
-        bootstrap="./tests/bootstrap.php"
+        bootstrap="./src/Blog/Tests/bootstrap.php"
         backupGlobals="false"
         backupStaticAttributes="false"
         colors="true"
@@ -12,8 +12,11 @@
         syntaxCheck="false"
         >
     <testsuites>
-        <testsuite name="Blog Test Suite">
-            <directory>./tests/</directory>
+        <testsuite name="Blog Functional Tests Suite">
+            <directory>./src/Blog/Tests/Functional</directory>
+        </testsuite>
+        <testsuite name="Blog Unit Tests Suite">
+            <directory>./src/Blog/Tests/Unit</directory>
         </testsuite>
     </testsuites>
 </phpunit>

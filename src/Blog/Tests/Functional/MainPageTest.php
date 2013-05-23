@@ -8,9 +8,6 @@ class TestMainPage extends WebTestCase {
     public function createApplication() {
         require ROOT_DIR . '/config/bootstrap.php';
         $app['debug'] = true;
-
-        // TODO: init DB with some pages of posts, for pagination testing
-
         return $app;
     }
 
