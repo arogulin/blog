@@ -3,12 +3,14 @@
 {% block content %}
     {% for post in posts %}
         <div class="post">
-            <h3>{{ post.title }}</h3>
+            <h3 class="title"><a href="{{ path('post', {slug: post.slug}) }}">{{ post.title }}</a></h3>
 
-            <div>{{ post.date | date("d.m.Y H:i") }}</div>
-            <div>
-                {{ post.content | raw | slice(0, 10) }}
+            <div class="date">{{ post.date | date("d.m.Y H:i") }}</div>
+            <div class="content">
+                {{ post.content | raw | slice(0, 100) }}
             </div>
+            <div class="comments">{{ 'comments_count'|trans }}: <span
+                        class="comments_count">{{ post.comments_count }}</span></div>
         </div>
     {% endfor %}
 

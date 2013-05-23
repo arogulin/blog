@@ -20,6 +20,8 @@ class IndexController {
             return $app->abort(404);
         }
 
+        // TODO: slice post content by words, not by symbols. Think about Twig extension.
+
         $pagination = array();
         if ($posts->getFoundRows() > $limit) {
             $pagesQuantity = ceil($posts->getFoundRows() / $limit);

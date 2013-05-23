@@ -30,9 +30,13 @@ class PostsRepository {
         $postsRows = $this->app['db']->fetchAll($query, array('public'));
         $foundRows = $this->app['db']->fetchColumn("SELECT FOUND_ROWS()");
 
+        $commentsRepo = new CommentsRepository($this->app);
+
         $posts = new BaseCollection();
         foreach ($postsRows as $postRow) {
-            $posts->append(new Post($postRow));
+            $post = new Post($postRow);
+            $post->setCommentsCount($commentsRepo->countComments($post['id']));
+            $posts->append($post);
         }
         $posts->setFoundRows($foundRows);
 

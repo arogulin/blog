@@ -26,13 +26,9 @@ class TestMainPage extends WebTestCase {
         $client = $this->createClient();
         $crawler = $client->request('GET', '/');
 
-        // TODO: calculate how many pages need to expect
-        $expectedPages = 2;
-
         // There are config.pagination.posts_main_page should be
         $expectedPostsCount = $this->app['config']['pagination']['posts_main_page'];
         $this->assertCount($expectedPostsCount, $crawler->filter('div.post'));
-        $this->assertCount($expectedPages, $crawler->filter('li.page'));
 
         $crawler = $client->request('GET', '/page/2');
         $this->assertTrue($client->getResponse()->isOk());

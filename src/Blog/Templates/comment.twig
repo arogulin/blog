@@ -1,0 +1,6 @@
+<div class="comment">
+    <span>{{ comment.author_name }}</span>
+    <span>{{ comment.date | date("d.m.Y H:i") }}</span>
+
+    <div>{{ comment.content | raw }}</div>
+</div>

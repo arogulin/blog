@@ -12,20 +12,20 @@
         {% if (pagination.current_page - pagination.near_pages - 1) > 1 %}
             {% set start_page = pagination.current_page - pagination.near_pages %}
             {% set first_page_block %}
-                <li>
-                    <a href="{{ url(pagination.route_name, {page: 1}) }}">1</a>
-                </li>
-                <li class="points">...</li>
+            <li>
+                <a href="{{ url(pagination.route_name, {page: 1}) }}">1</a>
+            </li>
+            <li class="points">...</li>
             {% endset %}
         {% endif %}
 
         {% if (pagination.current_page + pagination.near_pages + 1) < pagination.pages_quantity %}
             {% set end_page = pagination.current_page + pagination.near_pages %}
             {% set last_page_block %}
-                <li class="points">...</li>
-                <li>
-                    <a href="{{ url(pagination.route_name, {page: pagination.pages_quantity}) }}">{{ pagination.pages_quantity }}</a>
-                </li>
+            <li class="points">...</li>
+            <li>
+                <a href="{{ url(pagination.route_name, {page: pagination.pages_quantity}) }}">{{ pagination.pages_quantity }}</a>
+            </li>
             {% endset %}
         {% endif %}
 

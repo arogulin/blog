@@ -43,3 +43,6 @@ INSERT INTO `posts` (`id`, `title`, `slug`, `date`, `content`, `status`)
   (20, 'This is test post #20', 'this-is-test-post-20', '2013-03-08 10:11:12',
    '<p>Content of <b>this</b> test post.</p><p>next line of this test post</p>', 'public')
 ;
+
+INSERT INTO `comments` (`id`, `title`, `slug`, `date`, `content`, `status`)
+  VALUES

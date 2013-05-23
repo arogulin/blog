@@ -10,4 +10,7 @@ class Post extends BaseEntity {
     protected $content;
     protected $status;
 
+    protected $comments = array();
+    protected $comments_count = 0;
+
 }

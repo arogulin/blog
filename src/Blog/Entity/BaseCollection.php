@@ -3,7 +3,7 @@ namespace Blog\Entity;
 
 class BaseCollection extends \ArrayIterator {
 
-    protected $foundRows;
+    protected $foundRows = 0;
 
     public function getFoundRows() {
         return $this->foundRows;

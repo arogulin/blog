@@ -25,6 +25,7 @@ class TestFunctions extends WebTestCase {
             ' '                                       => '',
             ''                                        => '',
             '[]\';"".,/.,word&%^#@$@!()_+ -'          => 'word',
+            'Заголовок сообщения №1'                  => 'zagolovok-soobscheniya-1'
         );
 
         foreach ($strings as $string => $expected) {

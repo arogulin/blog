@@ -3,9 +3,15 @@
 {% block title %}{{ post.title }}{% endblock %}
 
 {% block content %}
-    <h1>{{ post.title }}</h1>
-    <div>{{ post.date | date("d.m.Y H:i") }}</div>
-    <div>
+    <h1 class="title">{{ post.title }}</h1>
+    <div class='date'>{{ post.date | date("d.m.Y H:i") }}</div>
+    <div class="content">
         {{ post.content | raw }}
+    </div>
+    <br/>
+    <div class="comments">
+        {% for comment in post.comments %}
+            {% include "comment.twig" %}
+        {% endfor %}
     </div>
 {% endblock %}
