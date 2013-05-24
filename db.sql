@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `content`     TEXT                                          NOT NULL,
   `status`      ENUM('not_moderated', 'moderated', 'deleted') NOT NULL DEFAULT 'not_moderated',
   PRIMARY KEY (`id`),
-  KEY `post_and_status` (`post`, `status`)
+  KEY `post_and_status` (`post_id`, `status`)
 )
   ENGINE = MyISAM
   DEFAULT CHARSET = utf8

@@ -1,9 +1,9 @@
 <?php
 namespace Blog\Repository;
 
-use Blog\Entity\BaseCollection;
-use Silex\Application;
+use Blog\Collection\PostsCollection;
 use Blog\Entity\Post;
+use Silex\Application;
 
 class PostsRepository {
 
@@ -24,20 +24,17 @@ class PostsRepository {
         $query = "
             SELECT SQL_CALC_FOUND_ROWS * 
             FROM `posts` 
-            WHERE `status` = ? 
+            WHERE `status` = ?
             ORDER BY `date` DESC LIMIT " . $offset . ", " . $limit;
 
         $postsRows = $this->app['db']->fetchAll($query, array('public'));
         $foundRows = $this->app['db']->fetchColumn("SELECT FOUND_ROWS()");
 
-        $commentsRepo = new CommentsRepository($this->app);
-
-        $posts = new BaseCollection();
-        foreach ($postsRows as $postRow) {
-            $post = new Post($postRow);
-            $post->setCommentsCount($commentsRepo->countComments($post['id']));
-            $posts->append($post);
+        if (!$postsRows) {
+            return false;
         }
+
+        $posts = new PostsCollection($postsRows);
         $posts->setFoundRows($foundRows);
 
         return $posts;
@@ -45,7 +42,13 @@ class PostsRepository {
 
     public function findBySlug($slug) {
         $query = "SELECT * FROM `posts` WHERE `status` = 'public' AND `slug` = ?";
-        $post = $this->app['db']->fetchAssoc($query, array($slug));
+        $postRow = $this->app['db']->fetchAssoc($query, array($slug));
+
+        if (!$postRow) {
+            return false;
+        }
+
+        $post = new Post($postRow);
 
         return $post;
     }

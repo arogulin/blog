@@ -1,9 +1,9 @@
 <?php
 namespace Blog\Repository;
 
-use Blog\Entity\BaseCollection;
-use Silex\Application;
+use Blog\Collection\CommentsCollection;
 use Blog\Entity\Comment;
+use Silex\Application;
 
 class CommentsRepository {
 
@@ -24,10 +24,11 @@ class CommentsRepository {
 
         $commentsRows = $this->app['db']->fetchAll($query, array($postId, Comment::STATUS_MODERATED));
 
-        $comments = new BaseCollection();
-        foreach ($commentsRows as $commentRow) {
-            $comments->append(new Comment($commentRow));
+        if (!$commentsRows) {
+            return false;
         }
+
+        $comments = new CommentsCollection($commentsRows);
 
         return $comments;
     }

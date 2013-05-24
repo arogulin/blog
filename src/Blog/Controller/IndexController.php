@@ -4,6 +4,7 @@ namespace Blog\Controller;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 use Blog\Repository\PostsRepository;
+use Blog\Repository\CommentsRepository;
 
 class IndexController {
 
@@ -16,9 +17,15 @@ class IndexController {
         $posts = $postsRepo->getRecent($limit, $offset);
 
         // If requested non existed page
-        if (count($posts) == 0 && $posts->getFoundRows()) {
+        if (!$posts) {
             return $app->abort(404);
         }
+
+        $commentsRepo = new CommentsRepository($app);
+        foreach ($posts as $post) {
+            $post->setCommentsCount($commentsRepo->countComments($post['id']));
+        }
+
 
         // TODO: slice post content by words, not by symbols. Think about Twig extension.
 

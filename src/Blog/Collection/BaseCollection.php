@@ -1,5 +1,5 @@
 <?php
-namespace Blog\Entity;
+namespace Blog\Collection;
 
 class BaseCollection extends \ArrayIterator {
 
