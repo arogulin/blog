@@ -42,4 +42,24 @@ class Functions {
         return $result;
     }
 
+    /**
+     * Wrap $string to last "space" or "dot" before position $length.
+     *
+     * @param string $string String for wrapping
+     * @param int    $length Max length of wrapped string
+     * @return string Wrapped string
+     */
+    public static function wrapContentToWord($string, $length = 100) {
+        // If string length lower than $length, just return it
+        if (mb_strlen($string, 'utf-8') <= $length) {
+            return $string;
+        }
+        // From position at $length start
+        $subString = mb_substr($string, 0, $length, 'utf-8');
+        $endPositionDot = mb_strrpos($subString, '.', null, 'utf-8');
+        $endPositionSpace = mb_strrpos($subString, ' ', null, 'utf-8');
+        $endPosition = max($endPositionDot + 1, $endPositionSpace); // +1 because we need to leave a dot in string 
+        return mb_substr($subString, 0, $endPosition, 'utf-8');
+    }
+
 }

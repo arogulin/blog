@@ -51,6 +51,7 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.path'    => ROOT_DIR . '/src/Blog/Templates',
     'twig.options' => array('cache' => ROOT_DIR . '/cache/twig'),
 ));
+$filter = new \Twig_SimpleFilter('word_wrap', array('Blog\Lib\Functions', 'wrapContentToWord'));
 
 // Register translation
 $app->register(new Silex\Provider\TranslationServiceProvider());
@@ -60,3 +61,6 @@ $app['translator'] = $app->share($app->extend('translator', function ($translato
     $translator->addResource('yaml', ROOT_DIR . '/src/Blog/Locales/' . $locale . '.yml', $locale);
     return $translator;
 }));
+
+// We can add filter only after all $app->register calls
+$app['twig']->addFilter($filter);

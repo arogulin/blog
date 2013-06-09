@@ -45,4 +45,20 @@ class TestFunctions extends WebTestCase {
             $this->assertEquals($string, Functions::fromCamelCase($expected));
         }
     }
+
+    public function testWrapContentToWord() {
+        $strings = array(
+            'This is super long string'       => 'This is super',
+            'Это сообщение на русском языке'  => 'Это сообщение на',
+            'It ends with dot. Next sentence' => 'It ends with dot.',
+            'Short string'                    => 'Short string',
+            ''                                => '',
+        );
+
+        $maxSymbols = 17;
+
+        foreach ($strings as $string => $expected) {
+            $this->assertEquals($expected, Functions::wrapContentToWord($string, $maxSymbols));
+        }
+    }
 }

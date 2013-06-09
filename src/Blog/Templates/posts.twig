@@ -7,7 +7,7 @@
 
             <div class="date">{{ post.date | date("d.m.Y H:i") }}</div>
             <div class="content">
-                {{ post.content | raw | slice(0, 100) }}
+                {{ post.content | raw | word_wrap(100) }}
             </div>
             <div class="comments">{{ 'comments_count'|trans }}: <span
                         class="comments_count">{{ post.comments_count }}</span></div>
