@@ -4,6 +4,7 @@ if (!defined('ROOT_DIR')) {
     define('ROOT_DIR', realpath(__DIR__ . '/..'));
 }
 
+use Silex\Provider\FormServiceProvider;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Translation\Loader\YamlFileLoader;
@@ -43,15 +44,11 @@ if ($app['debug']) {
     });
 }
 
+// Register Form provider
+$app->register(new FormServiceProvider());
+
 // Register UrlGenerator for url generation (f.e. in pagination)
 $app->register(new Silex\Provider\UrlGeneratorServiceProvider());
-
-// Register Twig template engine
-$app->register(new Silex\Provider\TwigServiceProvider(), array(
-    'twig.path'    => ROOT_DIR . '/src/Blog/Templates',
-    'twig.options' => array('cache' => ROOT_DIR . '/cache/twig'),
-));
-$filter = new \Twig_SimpleFilter('word_wrap', array('Blog\Lib\Functions', 'wrapContentToWord'));
 
 // Register translation
 $app->register(new Silex\Provider\TranslationServiceProvider());
@@ -62,5 +59,10 @@ $app['translator'] = $app->share($app->extend('translator', function ($translato
     return $translator;
 }));
 
-// We can add filter only after all $app->register calls
+// Register Twig template engine
+$app->register(new Silex\Provider\TwigServiceProvider(), array(
+    'twig.path'    => ROOT_DIR . '/src/Blog/Templates',
+    'twig.options' => array('cache' => ROOT_DIR . '/cache/twig'),
+));
+$filter = new \Twig_SimpleFilter('word_wrap', array('Blog\Lib\Functions', 'wrapContentToWord'));
 $app['twig']->addFilter($filter);

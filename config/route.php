@@ -1,4 +1,4 @@
-<?php
+ <?php
 $blog = $app['controllers_factory'];
 
 // Main page
@@ -19,7 +19,7 @@ $blog->get('/posts/{slug}', 'Blog\Controller\PostController::show')
 ->bind('post');
 
 // Add comment to post page
-$blog->post('/comments/{postId}/add', 'Blog\Controller\CommentController::add')
+$blog->post('/posts/{slug}', 'Blog\Controller\PostController::addComment')
 ->bind('add_comment');
 
 

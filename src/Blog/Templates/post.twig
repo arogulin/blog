@@ -9,9 +9,16 @@
         {{ post.content | raw }}
     </div>
     <br/>
+    <div class="form_add_comment">
+        <form action="" method="post">
+            {{ form_widget(form) }}
+            <input type="submit" name="submit" value="{{ 'submit' | trans }}"/>
+        </form>
+    </div>
     <div class="comments">
         {% for comment in post.comments %}
             {% include "comment.twig" %}
         {% endfor %}
     </div>
+    
 {% endblock %}

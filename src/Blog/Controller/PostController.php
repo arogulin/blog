@@ -21,6 +21,26 @@ class PostController {
         $comments = $commentsRepo->getList($post['id']);
         $post['comments'] = $comments;
 
-        return $app['twig']->render('post.twig', array('post' => $post));
+        $data = array(
+            'name'  => 'Your name',
+            'email' => 'Your email',
+        );
+        $form = $app['form.factory']->createBuilder('form', $data)
+                ->add('name')
+                ->add('email')
+                ->add('gender', 'choice', array(
+                'choices'  => array(1 => 'male', 2 => 'female'),
+                'expanded' => true,
+            ))
+                ->getForm();
+
+        return $app['twig']->render('post.twig', array('post' => $post, 'form' => $form->createView()));
+    }
+
+    public function addComment(Request $request, Application $app) {
+        echo '<pre>';
+        var_dump($request);
+        echo '</pre>';
+        die();
     }
 }
